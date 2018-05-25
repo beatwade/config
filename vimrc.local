@@ -1,1 +1,79 @@
-/home/beatwade/.vimrc.local
+nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
+" theme config
+"colorscheme molokai
+let g:airline_powerline_fonts = 1
+"javascript jsx config
+let g:syntastic_javascript_checkers = ['eslint']
+" enable jsx syntax in js
+let g:jsx_ext_required = 0
+
+" vim autofomat
+" auto-formatter
+let g:ale_emit_conflict_warnings = 0
+let g:ale_javascript_eslint_executable = 'eslint'
+let g:ale_javascript_eslint_options = ''
+let g:ale_javascript_eslint_use_global = 0
+
+let g:ale_echo_cursor = 1
+let g:ale_echo_msg_error_str = 'Error'
+let g:ale_echo_msg_format = '%s'
+let g:ale_echo_msg_warning_str = 'Warning'
+let g:ale_enabled = 1
+let g:ale_keep_list_window_open = 0
+let g:ale_lint_delay = 200
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'always'
+let g:ale_linter_aliases = {}
+let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_open_list = 0
+let g:ale_set_highlights = 0
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_set_signs = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '>>'
+let g:ale_sign_offset = 1000000
+let g:ale_sign_warning = '--'
+let g:ale_statusline_format = ['%d error(s)', '%d warning(s)', 'OK']
+let g:ale_warn_about_trailing_whitespace = 1
+
+" nerdtree configautocmd VimEnter */workspace/* NERDTree| wincmd p
+noremap <F3> :Autoformat<CR>
+" bufExplore
+nmap <F4> :BufExplorer<CR>
+" tagbar
+nnoremap <F6> :TagbarToggle<CR> "我一般把tagbar绑在<F6>上
+let g:tagbar_autoclose=1 "在一个tag上按回车后，自动跳转到tag在文件的位置，并关闭tagbar
+" 更改快捷键
+map f <Plug>(easymotion-prefix)
+map ff <Plug>(easymotion-s)
+map fs <Plug>(easymotion-f)
+map fl <Plug>(easymotion-lineforward)
+map fj <Plug>(easymotion-j)
+map fk <Plug>(easymotion-k)
+map fh <Plug>(easymotion-linebackward)
+" 忽略大小写
+let g:EasyMotion_smartcase = 1
+autocmd CmdwinEnter * nnoremap <CR> <CR>
+autocmd BufReadPost quickfix nnoremap <CR> <CR>
+nnoremap <CR> o<Esc>
+nnoremap <S-CR> i<CR><Esc> " Needed for GVIm
+nnoremap ^[0M i<CR><Esc>   " Needed for CLI VIm (Note: ^[0M was created with Ctrl+V Shift+Enter, don't type it directly)
+" debug
+let g:vdebug_options = { "port" : 9001, "path_maps": {"/var/www": "/home/beatwade/Code" } }
+set t_Co=256
+" Note, perl automatically sets foldmethod in the syntax file
+set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9,Andale\ Mono\ Regular\ 10,Menlo\ Regular\ 10,Consolas\ Regular\ 10,Courier\ New\ Regular\ 10
+set tabstop=2 shiftwidth=2 expandtab
+set guioptions=i
+if has('gui_running')
+  set lines=999 columns=999
+endif
+" nerdcomment
+let g:NERDTrimTrailingWhitespace = 1
+let g:NERDSpaceDelims = 1
+" deoplete
+let g:deoplete#enable_at_startup = 1

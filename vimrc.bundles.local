@@ -1,1 +1,15 @@
-/home/beatwade/.vimrc.bundles.local
+Bundle "jelera/vim-javascript-syntax"
+Bundle "othree/yajs"
+Bundle "mxw/vim-jsx"
+Bundle "isRuslan/vim-es6"
+" import js 
+Bundle "Galooshi/import-js"
+" eslint
+Bundle "Chiel92/vim-autoformat"
+Bundle "w0rp/ale"
+" bufexpore
+Bundle "vim-scripts/bufexplorer.zip"
+Bundle "joonty/vdebug"
+Bundle 'Shougo/deoplete.nvim'
+Bundle 'roxma/nvim-yarp'
+Bundle 'roxma/vim-hug-neovim-rpc'
