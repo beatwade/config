@@ -77,3 +77,8 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDSpaceDelims = 1
 " deoplete
 let g:deoplete#enable_at_startup = 1
+" python mode python3
+let g:pymode_python = 'python3'
+let g:syntastic_python_python_exe = 'python3'
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
