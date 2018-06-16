@@ -67,7 +67,30 @@ let g:vdebug_options = { "port" : 9001, "path_maps": {"/var/www": "/home/beatwad
 set t_Co=256
 " Note, perl automatically sets foldmethod in the syntax file
 set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9,Andale\ Mono\ Regular\ 10,Menlo\ Regular\ 10,Consolas\ Regular\ 10,Courier\ New\ Regular\ 10
-set tabstop=2 shiftwidth=2 expandtab
+func! ExpandTab(len) " {{{
+	if a:len
+		setlocal expandtab
+		execute 'setlocal shiftwidth='.a:len
+		execute 'setlocal softtabstop='.a:len
+		execute 'setlocal tabstop='.a:len
+	else
+		setlocal noexpandtab
+		execute 'setlocal shiftwidth&vim'
+		execute 'setlocal softtabstop&vim'
+		execute 'setlocal tabstop&vim'
+	endif
+endfunc " }}}
+autocmd FileType html,css,scss,javascript,tex call ExpandTab(2)
+autocmd FileType php,python,json,nginx call ExpandTab(4)
+
+autocmd FileType vim setlocal foldmethod=marker
+autocmd FileType json setlocal foldmethod=syntax
+autocmd FileType json setlocal foldlevel=1
+autocmd FileType markdown setlocal wrap
+autocmd BufRead composer.lock setlocal ft=json
+autocmd BufRead *.phpt setlocal ft=php
+autocmd BufRead *.phtml setlocal ft=html
+autocmd BufRead *jsx setlocal ft=javascript
 set guioptions=i
 if has('gui_running')
   set lines=999 columns=999
