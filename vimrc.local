@@ -80,7 +80,7 @@ func! ExpandTab(len) " {{{
 		execute 'setlocal tabstop&vim'
 	endif
 endfunc " }}}
-autocmd FileType html,css,scss,javascript,tex call ExpandTab(2)
+autocmd FileType html,css,scss,javascript,tex,less,typescript call ExpandTab(2)
 autocmd FileType php,python,json,nginx call ExpandTab(4)
 
 autocmd FileType vim setlocal foldmethod=marker
@@ -90,7 +90,14 @@ autocmd FileType markdown setlocal wrap
 autocmd BufRead composer.lock setlocal ft=json
 autocmd BufRead *.phpt setlocal ft=php
 autocmd BufRead *.phtml setlocal ft=html
-autocmd BufRead *jsx setlocal ft=javascript
+autocmd BufRead *.jsx setlocal ft=javascript
+autocmd BufRead *.js setlocal ft=javascript
+autocmd BufRead *.less setlocal ft=less
+autocmd BufRead *.ts setlocal ft=typescript
+
+" typescript
+let g:typescript_indent_disable = 1
+"
 set guioptions=i
 if has('gui_running')
   set lines=999 columns=999
