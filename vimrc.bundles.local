@@ -13,3 +13,5 @@ Bundle "joonty/vdebug"
 Bundle 'Shougo/deoplete.nvim'
 Bundle 'roxma/nvim-yarp'
 Bundle 'roxma/vim-hug-neovim-rpc'
+" typescript
+Bundle 'leafgarland/typescript-vim'
