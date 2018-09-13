@@ -1,8 +1,13 @@
+" fix bug
+Plugin 'heracek/HTML-AutoCloseTag', {'name': 'HTML-AutoCloseTag2'}
+UnBundle 'amirh/HTML-AutoCloseTag'
+
+" self config
 Bundle "jelera/vim-javascript-syntax"
 Bundle "othree/yajs"
 Bundle "mxw/vim-jsx"
 Bundle "isRuslan/vim-es6"
-" import js 
+" import js
 Bundle "Galooshi/import-js"
 " eslint
 Bundle "Chiel92/vim-autoformat"
