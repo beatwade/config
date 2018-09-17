@@ -1,8 +1,21 @@
 nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
 nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
-" theme config
-"colorscheme molokai
+" theme config windows
+if &term =~ '256color'
+
+    " The following two lines solve the BCE issue described here: https://sunaku.github.io/vim-256color-bce.html
+    set term=screen-256color
+    set t_ut=
+
+    set background=dark
+
+    " Be sure to store your `<theme>.vim` files in ~/.vim/colors/
+    colorscheme gruvbox
+    "colorscheme monokai
+    "colorscheme solarized
+
+endif
 let g:airline_powerline_fonts = 1
 "javascript jsx config
 let g:syntastic_javascript_checkers = ['eslint']
