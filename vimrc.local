@@ -2,6 +2,8 @@ nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
 nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 " theme config windows
+" fix bug in hyperjs vim auto complete
+set background=dark
 if &term =~ '256color'
 
     " The following two lines solve the BCE issue described here: https://sunaku.github.io/vim-256color-bce.html
