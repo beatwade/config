@@ -19,7 +19,7 @@ if &term =~ '256color'
 
 endif
 " shell for nvim
-set shell=/usr/bin/zsh
+" set shell=/usr/bin/zsh
 
 let g:airline_powerline_fonts = 1
 "javascript jsx config
@@ -84,7 +84,11 @@ nnoremap ^[0M i<CR><Esc>   " Needed for CLI VIm (Note: ^[0M was created with Ctr
 let g:vdebug_options = { "port" : 9001, "path_maps": {"/var/www": "/home/beatwade/Code" } }
 set t_Co=256
 " Note, perl automatically sets foldmethod in the syntax file
-set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9,Andale\ Mono\ Regular\ 10,Menlo\ Regular\ 10,Consolas\ Regular\ 10,Courier\ New\ Regular\ 10
+if LINUX()
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9,Andale\ Mono\ Regular\ 10,Menlo\ Regular\ 10,Consolas\ Regular\ 10,Courier\ New\ Regular\ 10
+elseif WINDOWS()
+    set guifont=Consolas:h9:cANSI
+endif
 func! ExpandTab(len) " {{{
 	if a:len
 		setlocal expandtab
