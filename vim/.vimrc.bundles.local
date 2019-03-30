@@ -20,3 +20,7 @@ Bundle 'roxma/nvim-yarp'
 Bundle 'roxma/vim-hug-neovim-rpc'
 " typescript
 Bundle 'leafgarland/typescript-vim'
+" vagrant type
+Bundle 'hashivim/vim-vagrant'
+" prettier
+Bundle 'prettier/vim-prettier'
