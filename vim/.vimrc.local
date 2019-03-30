@@ -1,6 +1,3 @@
-nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
-nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
-nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 " theme config windows
 " fix bug in hyperjs vim auto complete
 set background=dark
@@ -18,14 +15,52 @@ if &term =~ '256color'
     "colorscheme solarized
 
 endif
-" shell for nvim
-" set shell=/usr/bin/zsh
+if !exists('g:os')
+    if has('win32') || has('win16')
+        let g:os = 'Windows'
+    else
+        let g:os = substitute(system('uname'), '\n', '', '')
+    endif
+endif
+
+if g:os == 'Darwin'
+    " mac stuff
+endif
+
+if g:os == 'Linux'
+    " linux stuff
+    " shell for nvim
+    set shell=/usr/bin/zsh
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9,Andale\ Mono\ Regular\ 10,Menlo\ Regular\ 10,Consolas\ Regular\ 10,Courier\ New\ Regular\ 10
+    set clipboard+=unnamedplus
+endif
+
+if g:os == 'Windows'
+    " windows stuff
+    set directory=c:\tmp,c:\temp
+    set t_Co=256
+    set guifont=Source_Code_Pro_for_Powerline:h8:cANSI
+    set background=dark
+    " Be sure to store your `<theme>.vim` files in ~/.vim/colors/
+    " let g:python_host_prog = 'D:/Program Files/apps/python27/current/python.exe'
+    " let g:python3_host_prog = 'D:/Program Files/apps/python/current/python.exe'
+    colorscheme gruvbox
+
+    set clipboard=unnamed
+    "colorscheme monokai
+    "colorscheme solarized
+endif
+
+" etc
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 let g:airline_powerline_fonts = 1
 "javascript jsx config
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['tslint']
 " enable jsx syntax in js
-let g:jsx_ext_required = 0
+let g:jsx_ext_required = 1
 
 " vim autofomat
 " auto-formatter
@@ -45,7 +80,7 @@ let g:ale_lint_on_enter = 1
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_linter_aliases = {}
-let g:ale_linters = {'javascript': ['eslint']}
+let g:ale_linters = {'javascript': ['tslint']}
 let g:ale_open_list = 0
 let g:ale_set_highlights = 0
 let g:ale_set_loclist = 1
@@ -63,7 +98,8 @@ noremap <F3> :Autoformat<CR>
 " bufExplore
 nmap <F4> :BufExplorer<CR>
 " tagbar
-nnoremap <F6> :TagbarToggle<CR> "我一般把tagbar绑在<F6>上
+nnoremap <F2> :TagbarToggle<CR> "我一般把tagbar绑在<F6>上
+let g:airline#extensions#tagbar#enabled = 0
 let g:tagbar_autoclose=1 "在一个tag上按回车后，自动跳转到tag在文件的位置，并关闭tagbar
 " 更改快捷键
 map f <Plug>(easymotion-prefix)
@@ -79,31 +115,26 @@ autocmd CmdwinEnter * nnoremap <CR> <CR>
 autocmd BufReadPost quickfix nnoremap <CR> <CR>
 nnoremap <CR> o<Esc>
 nnoremap <S-CR> i<CR><Esc> " Needed for GVIm
-nnoremap ^[0M i<CR><Esc>   " Needed for CLI VIm (Note: ^[0M was created with Ctrl+V Shift+Enter, don't type it directly)
 " debug
-let g:vdebug_options = { "port" : 9001, "path_maps": {"/var/www": "/home/beatwade/Code" } }
-set t_Co=256
+" let g:vdebug_options = { "port" : 9001, "path_maps": {"/var/www": "/home/beatwade/Code" } }
+
 " Note, perl automatically sets foldmethod in the syntax file
-if LINUX()
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 9,Andale\ Mono\ Regular\ 10,Menlo\ Regular\ 10,Consolas\ Regular\ 10,Courier\ New\ Regular\ 10
-elseif WINDOWS()
-    set guifont=Consolas:h9:cANSI
-endif
+
 func! ExpandTab(len) " {{{
-	if a:len
-		setlocal expandtab
-		execute 'setlocal shiftwidth='.a:len
-		execute 'setlocal softtabstop='.a:len
-		execute 'setlocal tabstop='.a:len
-	else
-		setlocal noexpandtab
-		execute 'setlocal shiftwidth&vim'
-		execute 'setlocal softtabstop&vim'
-		execute 'setlocal tabstop&vim'
-	endif
+    if a:len
+        setlocal expandtab
+        execute 'setlocal shiftwidth='.a:len
+        execute 'setlocal softtabstop='.a:len
+        execute 'setlocal tabstop='.a:len
+    else
+        setlocal noexpandtab
+        execute 'setlocal shiftwidth&vim'
+        execute 'setlocal softtabstop&vim'
+        execute 'setlocal tabstop&vim'
+    endif
 endfunc " }}}
-autocmd FileType html,css,scss,javascript,tex,less,typescript call ExpandTab(2)
-autocmd FileType php,python,json,nginx call ExpandTab(4)
+autocmd FileType html,css,scss,javascript,tex,less,typescript,json call ExpandTab(2)
+autocmd FileType php,python,nginx call ExpandTab(4)
 
 autocmd FileType vim setlocal foldmethod=marker
 autocmd FileType json setlocal foldmethod=syntax
@@ -116,24 +147,23 @@ autocmd BufRead *.jsx setlocal ft=javascript
 autocmd BufRead *.js setlocal ft=javascript
 autocmd BufRead *.less setlocal ft=less
 autocmd BufRead *.ts setlocal ft=typescript
+autocmd BufRead *.tsx setlocal ft=typescript
+
 
 " typescript
 let g:typescript_indent_disable = 1
 "
 set guioptions=i
 if has('gui_running')
-  set lines=999 columns=999
+    set lines=999 columns=999
 endif
 " nerdcomment
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDSpaceDelims = 1
 " deoplete
 let g:deoplete#enable_at_startup = 1
-" python mode python3
-let g:pymode_python = 'python3'
-let g:syntastic_python_python_exe = 'python3'
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-" prettier config
+
+" prettier
 let g:prettier#autoformat = 0
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*php PrettierAsync
+let g:prettier#config#tab_width = 2
+autocmd BufWritePre  *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html,*php PrettierAsync
