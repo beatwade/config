@@ -1,18 +1,32 @@
 " theme config windows
 " fix bug in hyperjs vim auto complete
-set background=dark
+syntax on
+if (has("autocmd") && !has("gui_running"))
+
+    augroup colorset
+
+        autocmd!
+
+            let s:white = { "gui": "#ABB2BF", "cterm": "145", "cterm16" : "7"  }
+
+        autocmd ColorScheme * call onedark#set_highlight("Normal", { "fg": s:white  }) " `bg` will not be styled since there is no `bg` setting
+
+    augroup END
+endif
+colorscheme onedark
 if &term =~ '256color'
+
+    " let g:onedark_termcolors=16
 
     " The following two lines solve the BCE issue described here: https://sunaku.github.io/vim-256color-bce.html
     set term=screen-256color
-    set t_ut=
-
-    set background=dark
+    set t_ut= | set ttyscroll=1
+    " set background=dark
 
     " Be sure to store your `<theme>.vim` files in ~/.vim/colors/
-    colorscheme gruvbox
-    "colorscheme monokai
-    "colorscheme solarized
+    " colorscheme gruvbox
+    " colorscheme monokai
+    " colorscheme solarized
 
 endif
 if !exists('g:os')

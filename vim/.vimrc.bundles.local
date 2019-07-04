@@ -24,3 +24,7 @@ Bundle 'leafgarland/typescript-vim'
 Bundle 'hashivim/vim-vagrant'
 " prettier
 Bundle 'prettier/vim-prettier'
+"
+Bundle 'joshdick/onedark.vim'
+"
+Bundle 'sheerun/vim-polyglot'
